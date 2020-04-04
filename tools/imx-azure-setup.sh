@@ -23,11 +23,10 @@ if [ ! -e $1/conf/local.conf.sample ]; then
     if [ "$MACHINE" = "" ]; then
         MACHINE=imx6qpsabresd
     fi
-    EULA=$EULA DISTRO=$DISTRO MACHINE=$MACHINE . ./fsl-setup-release.sh -b $@
+    EULA=$EULA DISTRO=$DISTRO MACHINE=$MACHINE . ./imx-setup-release.sh -b $@
 
     echo "# layers for Azure IoT Edge" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-iotedge\"" >> conf/bblayers.conf
-    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-rust\"" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-virtualization\"" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-imx-iotedge\"" >> conf/bblayers.conf
 else
