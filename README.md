@@ -21,7 +21,7 @@ Download the i.MX BSP Yocto Project Environment
 
 $: mkdir imx-yocto-bsp
 $: cd imx-yocto-bsp
-$: repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-sumo -m imx-4.14.98-2.0.0_demo-azure-iotedge.xml
+$: repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx-5.4.3-1.0.0_demo-azure-iotedge.xml
 $: repo sync
 
 Setup and Build for XWayland
@@ -49,21 +49,14 @@ Connect i.MX device to IoT Edge Hub
    Find the provisioning section of the file and un-comment the manual provisioning mode.
    Update the value of device_connection_string with the Connection String from your IoT Edge device.
 
- - Update the Edge Agent image config
-   Find the Edge Agent module spec section of the file and find the field "agent –> config –> image"
-   Update the value of image with "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0.6-linux-arm32v7".
-
  - Input the Edge device hostname
-   Find the Edge device hostname section of the file and update the value of hostname with the unique string, for example "imx8mmevk-sha001".
+   Find the Edge device hostname section of the file and update the value of hostname with the unique string, for example "imx8mmevk-sha003".
 
 3. Setup the device local time and enable Ethernet
-   Before restart IoT Edge Security Daemon, 2 important things should be done
+   Before restart IoT Edge Security Daemon, 1 important thing should be done
    1. Update local device time
    $: date -s <yyyy-mm-dd>
    $: date -s <hh:mm:ss>
-
-   2. Enable the ethernet
-   $: udhcpc
 
    Restart the daemon:
    $: systemctl restart iotedge
@@ -91,22 +84,27 @@ Connect i.MX device to IoT Edge Hub
      4. Select "Set Modules".
 
    Configure a deployment
-     1. In the "Deployment Modules" section of the page, select "+ Add".
-       And in the pop-up list, select the "IoT Edge Module".
+     1. In the "Modules -> IoT Edge Modules" section of the page, select "+ Add".
+       And in the pop-up list, select the "Marketplace Module".
 
-     2. In the page "IoT Edge Custom Modules", fill in the fields:
-       - Set Name wth tempSenor
-       - Set Image URI with mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0.6-linux-arm32v7
-       Click "Save"
+     2. In the page "IoT Edge Module Marketplace", search the module:
+       - Input "Temperature" in the search bar
+       - Find the module "Simulated Temperature Sensor" from Microsoft
+       Click the icon
 
-     3. Configure the Edge runtime setting
-       Click the “Configure advanced Edge runtime settings” button:
-       - Set Edge Hub’s Image with mcr.microsoft.com/azureiotedge-hub:1.0.6-linux-arm32v7
-       - Set Edge Agent’s Image with mcr.microsoft.com/azureiotedge-agent:1.0.6-linux-arm32v7
-       Click "Next" -> "Summit"
+     3. Save the configure
+       Click the “Review + Create” button:
+       - Check the module "SimulatedTemperatureSensor" is added to "modules"
+         And its image field is "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0"
+       Click "Create"
 
    View the module on your device
-     Wait for several minutes until tempSenor deploy and runs on the i.MX Device
-     Find the module "tempSenor" by:
+     Wait for several minutes until SimulatedTemperatureSensor deploy and runs on the i.MX Device
+     Find the module "SimulatedTemperatureSensor" by:
      $: iotedge list
 
+     As default, SimulatedTemperatureSensor will send 500 messages, at an interval of 5 seconds.
+     The message is like:
+        04/15/2020 14:05:16> Sending message: 1, Body: [{"machine":{"temperature":22.033405139941443,"pressure":1.1177296994869999},"ambient":{"temperature":21.073038873995205,"humidity":24},"timeCreated]
+     Check log by:
+     $: iotedge logs SimulatedTemperatureSensor
