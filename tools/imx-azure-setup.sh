@@ -35,5 +35,5 @@ fi
 
 echo ""
 echo "You can now create an i.MX Azure IoT Edge image:"
-echo "    $ bitbake core-image-weston"
+echo "    $ bitbake nxp-image-azure-iotedge"
 echo ""

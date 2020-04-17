@@ -27,10 +27,10 @@ $: repo sync
 Setup and Build for XWayland
 
   Build for i.MX 6QP SDB platform
-    $: MACHINE=imx6qpsabresd DISTRO=fsl-imx-xwayland source ./imx-azure-setup.sh -b bld-azure
+    $: MACHINE=imx6qpsabresd DISTRO=fsl-imx-xwayland source ./imx-azure-setup.sh bld-azure
 
   Build for i.MX 8MM EVK platform
-    $: MACHINE=imx8mmevk DISTRO=fsl-imx-xwayland source ./imx-azure-setup.sh -b bld-azure
+    $: MACHINE=imx8mmevk DISTRO=fsl-imx-xwayland source ./imx-azure-setup.sh bld-azure
 
 Build the rootfs with Azure IoT Edge
 
