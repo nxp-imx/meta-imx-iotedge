@@ -21,7 +21,7 @@ Download the i.MX BSP Yocto Project Environment
 
 $: mkdir imx-yocto-bsp
 $: cd imx-yocto-bsp
-$: repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx-5.4.3-1.0.0_demo-azure-iotedge.xml
+$: repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx-5.4.24-2.1.0_demo-azure-iotedge.xml
 $: repo sync
 
 Setup and Build for XWayland
@@ -57,6 +57,7 @@ Connect i.MX device to IoT Edge Hub
    1. Update local device time
    $: date -s <yyyy-mm-dd>
    $: date -s <hh:mm:ss>
+   $: hwclock -w
 
    Restart the daemon:
    $: systemctl restart iotedge
