@@ -6,6 +6,10 @@ SRC_URI += "file://Fix-build-break-on-rust-1.37.0.postpatch"
 
 POST_PATCHS = "Fix-build-break-on-rust-1.37.0.postpatch \
 "
+DEPENDS_remove = "docker"
+DEPENDS += "docker-ce"
+RDEPENDS_${PN}_remove = "docker"
+RDEPENDS_${PN} += "docker-ce"
 
 do_patch[postfuncs] += "add_workload_patch"
 
