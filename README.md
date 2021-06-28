@@ -21,7 +21,7 @@ Download the i.MX BSP Yocto Project Environment
 
 $: mkdir imx-yocto-bsp
 $: cd imx-yocto-bsp
-$: repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx-5.4.3-1.0.0_demo-azure-iotedge.xml
+$: repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-gatesgarth -m imx-5.10.9-1.0.0_demo-azure-iotedge.xml
 $: repo sync
 
 Setup and Build for XWayland
